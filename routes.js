@@ -23,6 +23,7 @@ const todoSchema=zod.object({
 })
 
 const updateSchema=zod.object({
+    _id:zod.string(),
     title:zod.string().min(2).optional(),
     description:zod.string().optional(),
     status:zod.boolean().default(false).optional()
@@ -90,6 +91,7 @@ router.put('/updateTodo', auth, async (req, res) => {
         { _id: todoexist._id },
         { $set: update.data }
     );
+    res.status(200).json({msg:"Todo updated successfully"})
 
     
 });
